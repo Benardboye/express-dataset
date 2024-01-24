@@ -12,6 +12,9 @@ var actor = require('./routes/actor');
 
 var app = express();
 
+var seed = require('./sqlite/seed');
+seed.initialize();
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

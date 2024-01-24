@@ -62,14 +62,14 @@ describe('git_test ', function() {
 					}
 					if(eve.request.method == "PUT") {
 						return chai.request(server)
-								   .put(eve.request.url)
-								   .set(eve.request.headers)
-								   .send(eve.request.body)
-								   .then((res) => {
-								   		return res;
-								   }).catch((err) => {
-								   		return err;
-								   });
+						.put(eve.request.url)
+						.set(eve.request.headers)
+						.send(eve.request.body)
+						.then((res) => {
+							return res;
+						}).catch((err) => {
+							return err;
+						});
 					}
 
 
@@ -83,11 +83,18 @@ describe('git_test ', function() {
 							if(e.response.status_code == 404) {
 								continue;
 							}
+							if (ar2.length !== ar1.length) {
+								// TODO: Debug
+								console.log(e.request.url)
+								console.log(results[j].body)
+								console.log(e.response.body)
+							}
 		 					expect(ar2.length).to.equal(ar1.length);
 							for (let k = 0; k < ar1.length; k++) {
 								expect(ar2[k]).to.deep.equal(ar1[k]);
 							}
 						}
+							
 						if (e.request.method == "POST") {
 							expect(results[j].status).to.equal(e.response.status_code);
 						}
